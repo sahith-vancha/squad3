@@ -14,17 +14,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	private EmployeeRepository repository;
 	@Override
-	public void insertEmployee(EmployeeDTO employee) {
+	public String insertEmployee(EmployeeDTO employee) {
 		// TODO Auto-generated method stub
 		repository.saveAndFlush(EmployeeDTO.prepareEmployeeEntity(employee));
+		return "Employee with id "+employee.getEmpId()+" removed succesfully";
+		
 
 	}
 
 	@Override
-	public void removeEmployee(Integer empId) {
+	public String removeEmployee(Integer empId) {
 		// TODO Auto-generated method stub
 		repository.deleteById(empId);
-		;
+		
+		return "Employee with id "+empId+" removed succesfully";
 
 	}
 
@@ -44,6 +47,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 		Employee employeeEntity=optionalEmployee.get();
 		employeeEntity.setSalary(salary);
 		repository.save(employeeEntity);
-		return null;
+		return "Employee with id "+empId+" updated salary succesfully";
 	}
 }
